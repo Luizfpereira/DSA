@@ -28,28 +28,43 @@ func TestAddFirst(t *testing.T) {
 }
 
 func TestAddLast(t *testing.T) {
-	l := NewLinkedList[int]()
-	l.addFirst(1)
-	l.addFirst(5)
-	l.addFirst(7)
-	l.addLast(9)
+	t.Run("test empty linkedList", func(t *testing.T) {
+		l := NewLinkedList[int]()
+		l.addLast(1)
 
-	//7, 5, 1, 9
+		want := []int{1}
+		var got []int
 
-	want := []int{7, 5, 1, 9}
-	var got []int
+		current := l.Head
 
-	current := l.Head
-
-	got = append(got, current.Val)
-
-	for current.Next != nil {
-		current = current.Next
 		got = append(got, current.Val)
-	}
+		assert.EqualValues(t, want, got)
+	})
 
-	assert.EqualValues(t, want, got)
+	t.Run("test not empty linkedList", func(t *testing.T) {
+		l := NewLinkedList[int]()
+		l.addFirst(1)
+		l.addFirst(5)
+		l.addFirst(7)
+		l.addLast(9)
+		l.addLast(3)
 
+		//7, 5, 1, 9, 3
+
+		want := []int{7, 5, 1, 9, 3}
+		var got []int
+
+		current := l.Head
+
+		got = append(got, current.Val)
+
+		for current.Next != nil {
+			current = current.Next
+			got = append(got, current.Val)
+		}
+
+		assert.EqualValues(t, want, got)
+	})
 }
 
 //addFirst

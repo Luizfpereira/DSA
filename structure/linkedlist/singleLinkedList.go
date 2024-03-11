@@ -28,6 +28,13 @@ func (l *LinkedList[T]) addFirst(val T) {
 func (l *LinkedList[T]) addLast(val T) {
 	l.Size++
 	newNode := NewNode(val)
-	newNode.Next = l.Head
-	l.Head = newNode
+	if l.Head == nil {
+		l.Head = newNode
+		return
+	}
+	current := l.Head
+	for current.Next != nil {
+		current = current.Next
+	}
+	current.Next = newNode
 }
