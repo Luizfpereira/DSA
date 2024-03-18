@@ -38,3 +38,40 @@ func (l *LinkedList[T]) addLast(val T) {
 	}
 	current.Next = newNode
 }
+
+func (l *LinkedList[T]) deleteFirst() (T, bool) {
+	if l.Head != nil {
+		curr := l.Head
+		l.Head = curr.Next
+		l.Size--
+		return curr.Val, true
+	}
+
+	var r T
+	return r, false
+}
+
+func (l *LinkedList[T]) deleteLast() (T, bool) {
+
+	if l.Head == nil {
+		var r T
+		return r, false
+	}
+
+	if l.Head.Next == nil {
+		return l.deleteFirst()
+	}
+
+	curr := l.Head
+
+	for ; curr.Next.Next != nil; curr = curr.Next {
+	}
+
+	retval := curr.Next.Val
+	curr.Next = nil
+	l.Size--
+
+	return retval, true
+}
+
+// func (l *LinkedList[T]) findNodeAt()
