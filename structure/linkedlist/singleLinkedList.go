@@ -5,7 +5,7 @@ type Node[T any] struct {
 	Next *Node[T]
 }
 
-type LinkedList[T any] struct {
+type SingleLinkedList[T any] struct {
 	Size int
 	Head *Node[T]
 }
@@ -14,18 +14,18 @@ func NewNode[T any](val T) *Node[T] {
 	return &Node[T]{Val: val, Next: nil}
 }
 
-func NewLinkedList[T any]() *LinkedList[T] {
-	return &LinkedList[T]{}
+func NewLinkedList[T any]() *SingleLinkedList[T] {
+	return &SingleLinkedList[T]{}
 }
 
-func (l *LinkedList[T]) addFirst(val T) {
+func (l *SingleLinkedList[T]) addFirst(val T) {
 	l.Size++
 	newNode := NewNode(val)
 	newNode.Next = l.Head
 	l.Head = newNode
 }
 
-func (l *LinkedList[T]) addLast(val T) {
+func (l *SingleLinkedList[T]) addLast(val T) {
 	l.Size++
 	newNode := NewNode(val)
 	if l.Head == nil {
@@ -39,7 +39,7 @@ func (l *LinkedList[T]) addLast(val T) {
 	current.Next = newNode
 }
 
-func (l *LinkedList[T]) deleteFirst() (T, bool) {
+func (l *SingleLinkedList[T]) deleteFirst() (T, bool) {
 	if l.Head != nil {
 		curr := l.Head
 		l.Head = curr.Next
@@ -51,7 +51,7 @@ func (l *LinkedList[T]) deleteFirst() (T, bool) {
 	return r, false
 }
 
-func (l *LinkedList[T]) deleteLast() (T, bool) {
+func (l *SingleLinkedList[T]) deleteLast() (T, bool) {
 
 	if l.Head == nil {
 		var r T

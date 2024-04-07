@@ -2,7 +2,6 @@ package dp
 
 import "fmt"
 
-// usind Nested Loop
 func subArraySumDp(arr []int, x int) bool {
 	m := make(map[int]int)
 	currSum := 0
